@@ -21,7 +21,6 @@ const App = () => {
 
   return (
     <div className={classes.App}>
-      <h1>Try to see if continuos deployment works</h1>
       <Header />
       <Routes>
         <Route exact path="/" element={<Homepage />} />
