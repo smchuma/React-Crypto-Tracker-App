@@ -11,6 +11,7 @@ import {
 import { CryptoState } from "../CryptoContext";
 import { chartDays } from "../config/data";
 import SelectButton from "./SelectButton";
+import Chart from "chart.js/auto";
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
