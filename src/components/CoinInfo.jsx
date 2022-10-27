@@ -2,10 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { HistoricalChart } from "../config/api";
 import { Line } from "react-chartjs-2";
-import { CircularProgress, createTheme, makeStyles, ThemeProvider} from "@material-ui/core";
+import {
+  CircularProgress,
+  createTheme,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core";
 import { CryptoState } from "../CryptoContext";
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Chart }  from 'react-chartjs-2';
 import { chartDays } from "../config/data";
 import SelectButton from "./SelectButton";
 
@@ -13,7 +16,6 @@ const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
-  
 
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -37,7 +39,7 @@ const CoinInfo = ({ coin }) => {
 
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
-  
+
     setHistoricData(data.prices);
   };
 
@@ -103,12 +105,14 @@ const CoinInfo = ({ coin }) => {
                 width: "100%",
               }}
             >
-              {chartDays.map((day) =>(
-                
+              {chartDays.map((day) => (
                 <SelectButton
-                key={day.value} onClick={()=>setDays(day.value)}
-                selected={day.value === days}
-                >{day.label}</SelectButton>
+                  key={day.value}
+                  onClick={() => setDays(day.value)}
+                  selected={day.value === days}
+                >
+                  {day.label}
+                </SelectButton>
               ))}
             </div>
           </>
