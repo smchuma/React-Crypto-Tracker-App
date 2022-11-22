@@ -1,38 +1,19 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/styles";
 import axios from "axios";
-import { TrendingCoins } from "../config/api";
-import { CryptoState } from "../CryptoContext";
+import { TrendingCoins } from "../../config/api";
+import { CryptoState } from "../../CryptoContext";
 import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-const useStyles = makeStyles(() => ({
-  carousel: {
-    height: "50%",
-    display: "flex",
-    alignItems: "center",
-  },
-  carouselItem: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    cursor: "pointer",
-    textTransform: "uppercase",
-    color: "white",
-  },
-}));
+import "./Carousel.scss";
 
 //numbers with commas function
-
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
-  const classes = useStyles();
   const { currency, symbol } = CryptoState();
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +21,7 @@ const Carousel = () => {
     const { data } = await axios.get(TrendingCoins(currency));
     setTrending(data);
   };
-  console.log(trending);
+
   useEffect(() => {
     setLoading(true);
     fetchTrendingCoins();
@@ -48,13 +29,10 @@ const Carousel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
-  //items aliceCarousel
   const items = trending.map((coin) => {
-    //calculating percentage change in profit in past 24hrs
-    //if profit is more than or equal to 0, profit is gonna be true
     let profit = coin.price_change_percentage_24h >= 0;
     return (
-      <Link className={classes.carouselItem} to={`/coins/${coin.id}`}>
+      <Link className="carousel_item" to={`/coins/${coin.id}`}>
         <img
           src={coin.image}
           alt={coin.name}
@@ -77,18 +55,14 @@ const Carousel = () => {
       </Link>
     );
   });
-
-  // responsive alice carousel
   const responsive = {
     0: { items: 2 },
     512: { items: 5 },
   };
 
   return (
-    <div className={classes.carousel}>
-      {loading ? (
-        <CircularProgress style={{ color: "gold" }} />
-      ) : (
+    <>
+      <div className="carousel">
         <AliceCarousel
           autoPlay
           mouseTracking
@@ -100,8 +74,8 @@ const Carousel = () => {
           responsive={responsive}
           items={items}
         />
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

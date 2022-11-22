@@ -1,0 +1,61 @@
+.banner {
+  background-image: url(../../../public/assets/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  width: 100%;
+
+  .banner-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .titles {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      h1 {
+        font-weight: bold;
+        text-shadow: 2px 2px 4px #ff0000;
+        font-size: 80px;
+        font-family: montserrat;
+      }
+
+      h2 {
+        font-size: 20px;
+        font-family: montserrat;
+      }
+      button {
+        color: white;
+        background: transparent;
+        width: 120px;
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid white;
+        margin-top: 20px;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-color: #00ffff;
+          color: black;
+          transform: scale(1.1);
+        }
+      }
+    }
+    .image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.caros {
+  padding: 10px;
+  background-color: #01185e;
+  max-width: 100%;
+  margin: auto;
+}
